@@ -1,5 +1,5 @@
 :root {
-    --main-bg-color: rgb(0,91,178);/* rgb(160,176,191);*/
+    --main-bg-color: rgb(0,91,178);
     --additional-color: #85acc7;
     --hover-gradient: radial-gradient(circle, rgba(243,217,21,1) 0%, rgba(148,187,233,1) 100%);;
     --font-color: rgb(255,255,255);
@@ -103,6 +103,7 @@ input[type=checkbox]{
         left: 0;
         text-align: center;
         padding: 16px 0;
+        height: auto;
     }
     .menu li:hover {
         display: inline-block;
@@ -126,12 +127,15 @@ input[type=checkbox]{
     .dropdown li:hover {
         background-color: rgba(33,33,33,0.1);
     }
+    .link-list-item a{
+        font-size: x-large;
+    }
 }
 
 /*333333333333333333333333333333333333333333333333333333333333333333333333333*/
 
 main {
-    margin: 5vh 0;
+    margin: 8vh 0;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -189,18 +193,23 @@ article section {
     margin-left: 1%;
 }
 .link-list-item {
-    height: 15vh;
+    height: 12vh;
     display: flex;
     padding-left: 2vw;
-    font-size: 2.2em;
+    padding-right: 1vw;
     align-self: center;
     border-bottom: 1px solid var(--additional-color);
+}
+.link-list-item:hover {
+    color: var(--main-bg-color);
 }
 .link-list-item:first-child {
     border-top: 1px solid var(--additional-color);
 }
 .link-list-item a {
+    color: black;
     align-self: center;
+    font-size: x-large;
     width:100%;
 }
 .link-list-item a i {
@@ -210,11 +219,13 @@ article section {
 .legend {
     width: 171px;
     padding: 8px 8px;
-    font: 14px Arial, Helvetica, sans-serif;
-    background: white;
+    font-family: Arial, Helvetica, sans-serif;
     background: rgb(255, 255, 255);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     line-height: 24px;
+    font-size: 0.9em;
     color: #555;
+    display: flex;
+    flex-direction: column;
 }

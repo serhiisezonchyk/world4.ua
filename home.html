@@ -36,13 +36,12 @@
             <input type="checkbox" id="checkbox_toggle" />
             <label for="checkbox_toggle" class="hamburger">&#9776;</label>
             <div class="menu">
-                <li><a href="#">Українцям</a></li>
-                <li><a href="news.html">Новини</a></li>
                 <li><a href="charity.html">Благодійність</a></li>
-                <li><a href="#">Контакти</a></li>
+                <li><a href="contacts.html">Контакти</a></li>
+                <li><a href="telegram.html">Telegram-бот</a></li>
             </div>
         </ul>
-        <div class="logo" ><a href="home.html"><p>World4</p><p style="color:#ffff00">Ua</p></a></div>
+        <div class="logo" ><a href="home.html"><p>World4</p><p style="color:rgba(243,217,21,1); font-weight: bold">Ua</p></a></div>
     </nav>
 
     <div id="map">
@@ -327,11 +326,11 @@
         legend.onAdd = function(map) {
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML += "<h4>Позначення</h4>";
-            div.innerHTML += '<img src="legend/Territories_2_Безінформації0.png" /></i><span>Без інформації</span><br>';
-            div.innerHTML += '<img src="legend/Territories_2_Вільно1.png" /><span>Вільно</span><br>';
-            div.innerHTML += '<img src="legend/Territories_2_Часткововільно2.png" /><span>Частково вільно</span><br>';
-            div.innerHTML += '<img src="legend/Territories_2_Значніпроблеми3.png" /><span>Значні проблеми</span><br>';
-            div.innerHTML += '<img src="legend/Territories_2_Заборонено4.png" /><span>Заборонено</span><br>';
+            div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Безінформації0.png" /></i><span> Без інформації</span></div>';
+            div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Вільно1.png" /><span> Вільно</span></div>';
+            div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Часткововільно2.png" /><span> Частково вільно</span></div>';
+            div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Значніпроблеми3.png" /><span> Значні проблеми</span></div>';
+            div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Заборонено4.png" /><span> Заборонено</span></div>';
             return div;
         };
         legend.addTo(map);
