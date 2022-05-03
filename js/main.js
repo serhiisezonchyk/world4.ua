@@ -79,7 +79,7 @@ class Table {
     let table = new Table(json);
     table.createTable(table.data);
 
-    Pager(document.getElementById("tab"), 10);
+    Pager(document.getElementById("tab"),20);
 }
 
 /**

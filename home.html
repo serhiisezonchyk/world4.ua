@@ -322,7 +322,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
             .title += 'Search for a place';
 
-        var legend = L.control({ position: "topright" });
+        var legend = L.control({ position: "bottomleft" });
         legend.onAdd = function(map) {
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML += "<h4>Позначення</h4>";
@@ -339,7 +339,7 @@
             "Google Maps": layer_GoogleMaps_1,
             "Спрощений вигляд": layer_Simple_view_0,
         };
-        L.control.layers(baseMaps,{},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{},{collapsed:true}).addTo(map);
         setBounds();
         resetLabels([layer_Territories_2]);
         map.on("zoomend", function(){
@@ -351,7 +351,6 @@
         map.on("layerremove", function(){
             resetLabels([layer_Territories_2]);
         });
-
     </script>
     </body>
 </html>
