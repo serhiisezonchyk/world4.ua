@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Администрирование</title>
+	<script src="data/Territories_2.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <ul>
+        <li><button onclick="makeTable(json_Territories_2.features)" class="head_buttons" id="head_create">Создать таблицу</button></li>
+        <li><button class="head_buttons" onclick="showFilters()">Фильтры</button></li>
+	<li><button class="head_buttons" onclick="saveAllChanges()">Экспорт</button></li>
+    </ul>
+</header>
+<main>
+    <div class="filters_panel" style="display: none">
+        <h4>Найти в таблице</h4>
+        <input type="text" placeholder="Текст для поиска" id="search">
+        <button onclick="findByWord()" class="btn">Найти!</button><br>
+        <h4>Видимость колонок</h4>
+        <label><input type="checkbox" checked id="name">Название</label>
+        <label><input type="checkbox" checked id="status">Статус</label>
+        <label><input type="checkbox" checked id="general_info">Общая информация</label>
+	<label><input type="checkbox" checked id="entry_doc">Регистрация</label>
+        <label><input type="checkbox" checked id="reg_doc">Документы</label>
+        <label><input type="checkbox" checked id="transport">Транспорт</label>
+        <label><input type="checkbox" checked id="housing">Жильё</label>
+	<label><input type="checkbox" checked id="nutrition">Питание</label>
+	<label><input type="checkbox" checked id="pets">Животные</label>
+	<label><input type="checkbox" checked id="charity">Благотворительность</label>
+	<label><input type="checkbox" checked id="add_info">Дополнительно</label>
+        <button onclick="setAllColumnsVisibility()" class="btn">Готово!</button><br>
+        <h4>Отфильтровать по</h4>
+	<label>Идентификатору: <input type="text" id="fltr_id" placeholder="id"></label>
+        <label>Названию: <input type="text" id="fltr_name" placeholder="name"></label>
+        <label>Статусу: <input type="text" id="fltr_status" placeholder="status"></label>
+        <label>Ключевым фразам: <textarea id="fltr_memo" placeholder="Memo"></textarea></label><br>
+        <button onclick="makeFilter()" class="btn" id="fltr_btn_ready">Готово!</button>
+    </div>
+    <table id="tab" style="display: none">
+        <thead>
+        <tr>
+		<th>Ид</th>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Общая информация</th>
+	    <th>Регистрация</th>
+            <th>Документы</th>
+            <th>Транспорт</th>
+            <th>Жильё</th>
+	    <th>Питание</th>
+		<th>Животные</th>
+		<th>Благотворительность</th>
+		<th>Дополнительно</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="6"></td>
+        </tr>
+        </tfoot>
+    </table>
+</main>
+<footer>World4UA, Admin</footer>
+<div class="modal"  id="modal">
+    <div class="content_modal">
+        <button class="close_modal" onclick="closeModal()">x</button>
+        <h3>Редактировать данные</h3>
+        <div>
+		<h5>Идентификатор: </h5>
+		<label id="edit_id"> </label>
+            <h5>Название</h5>
+            <input type="text" id="edit_name"><br>
+            <h5>Статус</h5>
+            <input type="text" id="edit_status"><br>
+            <h5>Общая информация</h5>
+	    <textarea id="edit_general_info"></textarea><br>
+	    <h5>Регистрация</h5>
+	    <textarea id="edit_entry_doc"></textarea><br>
+            <h5>Документы</h5>
+	    <textarea id="edit_reg_doc"></textarea><br>
+            <h5>Транспорт</h5>
+            <textarea id="edit_transport"></textarea><br>
+            <h5>Жильё</h5>
+	    <textarea id="edit_housing"></textarea><br>
+            <h5>Питание</h5>
+	    <textarea id="edit_nutrition"></textarea><br>
+		<h5>Животные</h5>
+	    <textarea id="edit_pets"></textarea><br>
+		<h5>Благотворительность</h5>
+	    <textarea id="edit_charity"></textarea><br>
+		<h5>Дополнительно</h5>
+	    <textarea id="edit_add_info"></textarea><br>
+            <button id="edit_ok" class="btn">Ок</button>
+        </div>
+    </div>
+</div>
+<div class="modal"  id="modal2">
+    <div class="content_modal">
+        <button class="close_modal" onclick="closeModal()">x</button>
+        <h3>Сохраненные данные</h3>
+        <div>
+		<br></br>
+		<a id="href_file"> Territories_2.js </a>
+		<br></br>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
