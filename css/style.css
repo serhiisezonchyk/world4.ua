@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.content_modal {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 20%;
+    z-index: 1010;
+    margin: 100px auto;
+}
+
+.close_modal {
+    float: right;
+    font-size: 30px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    background-color: #ff3531;
+    color: #ffffff;
+}
+
+header, footer{
+    background: linear-gradient(to top, #E6E6FA, #6A5ACD);
+    height: 60px;
+    color: #ffffff;
+    font-family: "Century Gothic", sans-serif;
+}
+header {
+    border-bottom: solid 3px #6A5ACD;
+    background: linear-gradient(to top, #6A5ACD, #E6E6FA);
+}
+
+.head_buttons {
+    height: 60px;
+    width: 130px;
+    border: solid 4px #6A5ACD;
+    border-bottom: solid 2px #6A5ACD;
+    background-color: #6A5ACD;
+    color: #ffffff;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: "Century Gothic", sans-serif;
+}
+
+.head_buttons:hover {
+    background-color: #FFD700;
+    border: solid 2px #6A5ACD;
+}
+#head_create {
+    margin-left: 10px;
+}
+
+ul li {
+    display: inline;
+    cursor: pointer;
+}
+
+footer {
+    font-size: 0.9em;
+    width: 100%;
+}
+
+main {
+    min-height: calc(100vh - 60px);
+}
+
+.filters_panel {
+    background-color: #d6d5ce;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 0 0 17px 17px;
+}
+
+#tab {
+    margin-left: 20px;
+    margin-top: 10px;
+    border: solid 1px #d3d3d3;
+}
+
+td {
+    border: solid 1px #d3d3d3;
+}
+
+.btn {
+    border-radius: 5px;
+    height: 30px;
+    width: 60px;
+    background-color: #BEB6CA;
+    cursor: pointer;
+}
+
+#fltr_memo {
+    margin-top: 10px;
+}
+
+#fltr_btn_ready {
+    margin-top: 4px;
+}
+
+.pager {
+    margin-left: 3px;
+    margin-right: 3px;
+    color: crimson;
+    text-decoration: underline;
+}
+
+.pager:hover {
+    text-decoration: none;
+}
+
+#male, #female {
+    margin-right: 3px;
+}
+#male_label {
+    margin-right: 8px;
+}
+
+h5 {
+    margin-top: 5px;
+}
+
+#edit_memo {
+    height: 60px;
+    width: 200px;
+}
