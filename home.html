@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,16 @@
         </style>
         <title>world4ua</title>
         <script src="https://kit.fontawesome.com/7fd656dec6.js" crossorigin="anonymous"></script>
+
+
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet"></script>
+
+        <link
+                rel="stylesheet"
+                href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"
+        />
+        <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
     </head>
     <body>
     <nav class="navbar">
@@ -59,7 +69,6 @@
     <script src="data/Territories_2.js"></script>
     <script>
 
-
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
@@ -79,20 +88,16 @@
         var map = L.map('map', {
             zoomControl:false
         })
-
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: false,
             position: 'topleft',
             text: 'Search',
+            placeholder: 'Пошук...',
             title: 'Testing'
         }).addTo(map);
 
-        var zoomControl = new L.Control.Zoom({
-            zoomControl:true,
-            maxZoom:6,
-            minZoom:3,
-            position: 'bottomright'
-        }).addTo(map);
+
+
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -116,7 +121,7 @@
             maxNativeZoom: 7,
         });
         layer_Simple_view_0;
-        map.addLayer(layer_Simple_view_0);
+        //map.addLayer(layer_Simple_view_0);
         map.createPane('pane_GoogleMaps_1');
         map.getPane('pane_GoogleMaps_1').style.zIndex = 401;
         var layer_GoogleMaps_1 = L.tileLayer('http://mt1.google.com/vt/lyrs=m&hl=uk&x={x}&y={y}&z={z}', {
@@ -128,7 +133,7 @@
             minNativeZoom: 3,
             maxNativeZoom: 22,
         });
-        layer_GoogleMaps_1;
+        map.addLayer(layer_GoogleMaps_1);
         function pop_Territories_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -186,8 +191,23 @@
                         <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong>Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400, maxLength:400, autoPan:true});
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            var customOptions =
+                {
+                    maxWidth: screenWidth - 0.4*screenWidth,
+                    maxHeight:screenHeight - 0.4*screenHeight,
+                    autoPan:true,
+                }
+            layer.bindPopup(popupContent, customOptions);
         }
+
+        map.on('popupopen', function(e) {
+            var px = map.project(e.target._popup._latlng); // find the pixel location on the map where the popup anchor is
+            px.y -= e.target._popup._container.clientHeight/2; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+            map.panTo(map.unproject(px),{animate: false}); // pan to new center
+        });
+
         function style_Territories_2_0(feature) {
             var context = {
                 feature: feature,
@@ -322,7 +342,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
             .title += 'Search for a place';
 
-        var legend = L.control({ position: "bottomleft" });
+        var legend = L.control({ position: "bottomleft"});
         legend.onAdd = function(map) {
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML += "<h4>Позначення</h4>";
@@ -336,8 +356,9 @@
         legend.addTo(map);
 
         var baseMaps = {
-            "Google Maps": layer_GoogleMaps_1,
             "Спрощений вигляд": layer_Simple_view_0,
+            "Google Maps": layer_GoogleMaps_1,
+
         };
         L.control.layers(baseMaps,{},{collapsed:true}).addTo(map);
         setBounds();
