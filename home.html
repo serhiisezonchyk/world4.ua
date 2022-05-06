@@ -93,10 +93,20 @@
             position: 'topleft',
             text: 'Search',
             placeholder: 'Пошук...',
-            title: 'Testing'
+            title: 'Testing',
+            autocomplete:true
         }).addTo(map);
 
-
+        document.getElementById("geocoder-button").onclick = function(e) {
+            document.getElementById("geocoder-input").value = "";
+            osmGeocoder._clearResults();
+        }
+        map.on('click',function (){
+            osmGeocoder._clearResults();
+        })
+        map.on('drag',function (){
+            osmGeocoder._clearResults();
+        })
 
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -156,7 +166,28 @@
             else
                 fugitive_status = '';
 
-            var popupContent = '<table font>\
+            var popupContent = "";
+            if(
+                feature.properties['general_info'] == null &&
+                feature.properties['entry_doc']==null &&
+                feature.properties['reg_doc'] == null &&
+                feature.properties['transport'] == null &&
+                feature.properties['housing'] == null &&
+                feature.properties['nutrition'] == null &&
+                feature.properties['pets'] == null &&
+                feature.properties['charity'] == null &&
+                feature.properties['add_info'] == null
+            ){
+                popupContent = '<table font> \
+                <tr align="center">\
+                <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
+                </tr>\
+                <tr>\
+                <td colspan="2">Немає інформації</td>\
+                </tr>\
+                </table>'
+            }else{
+            popupContent = '<table font>\
                     <tr align="center">\
                         <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
                     </tr>\
@@ -164,39 +195,39 @@
                         <td colspan="2">' + fugitive_status + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-circle-info"></i><strong>Загальна інформація</strong><br />' + (feature.properties['general_info'] !== null ? autolinker.link(feature.properties['general_info'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-circle-info"></i><strong> Загальна інформація</strong><br />' + (feature.properties['general_info'] !== null ? autolinker.link(feature.properties['general_info'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-globe"></i><strong>Реєстрація</strong><br />' + (feature.properties['entry_doc'] !== null ? autolinker.link(feature.properties['entry_doc'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-globe"></i><strong> Реєстрація</strong><br />' + (feature.properties['entry_doc'] !== null ? autolinker.link(feature.properties['entry_doc'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-id-card"></i><strong>Документи</strong><br />' + (feature.properties['reg_doc'] !== null ? autolinker.link(feature.properties['reg_doc'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-id-card"></i><strong> Документи</strong><br />' + (feature.properties['reg_doc'] !== null ? autolinker.link(feature.properties['reg_doc'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-bus"></i><strong>Транспорт</strong><br />' + (feature.properties['transport'] !== null ? autolinker.link(feature.properties['transport'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-bus"></i><strong> Транспорт</strong><br />' + (feature.properties['transport'] !== null ? autolinker.link(feature.properties['transport'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-house"></i><strong>Житло</strong><br />' + (feature.properties['housing'] !== null ? autolinker.link(feature.properties['housing'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-house"></i><strong> Житло</strong><br />' + (feature.properties['housing'] !== null ? autolinker.link(feature.properties['housing'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-utensils"></i><strong>Харчування</strong><br />' + (feature.properties['nutrition'] !== null ? autolinker.link(feature.properties['nutrition'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-utensils"></i><strong> Харчування</strong><br />' + (feature.properties['nutrition'] !== null ? autolinker.link(feature.properties['nutrition'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-paw"></i><strong>Тварини</strong><br />' + (feature.properties['pets'] !== null ? autolinker.link(feature.properties['pets'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-paw"></i><strong> Тварини</strong><br />' + (feature.properties['pets'] !== null ? autolinker.link(feature.properties['pets'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-hand-holding-heart"></i><strong>Благодійність</strong><br />' + (feature.properties['charity'] !== null ? autolinker.link(feature.properties['charity'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-hand-holding-heart"></i><strong> Благодійність</strong><br />' + (feature.properties['charity'] !== null ? autolinker.link(feature.properties['charity'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong>Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong> Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                </table>';
+                </table>';}
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             var customOptions =
                 {
-                    maxWidth: screenWidth - 0.4*screenWidth,
-                    maxHeight:screenHeight - 0.4*screenHeight,
+                    maxWidth: screenWidth - 0.2*screenWidth,
+                    maxHeight:screenHeight - 0.34*screenHeight,
                     autoPan:true,
                 }
             layer.bindPopup(popupContent, customOptions);
@@ -342,17 +373,39 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
             .title += 'Search for a place';
 
+
         var legend = L.control({ position: "bottomleft"});
+        var legendstatus = false;
+        function showDisclaimer() {
+            if(legendstatus) {
+                var div = document.getElementById("legend");
+                div.innerHTML = '<h4 align="center">Позначення <i class="fa-solid fa-caret-down"></i></h4>';
+                div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Безінформації0.png" /></i><span> Без інформації</span></div>';
+                div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Вільно1.png" /><span> Вільно</span></div>';
+                div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Часткововільно2.png" /><span> Частково вільно</span></div>';
+                div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Значніпроблеми3.png" /><span> Значні проблеми</span></div>';
+                div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Заборонено4.png" /><span> Заборонено</span></div>';
+                legendstatus = false;
+            }
+            else{
+                var div = document.getElementById("legend");
+                div.innerHTML = '<h4 align="center">Позначення <i class="fa-solid fa-caret-up"></i></h4>';
+                legendstatus = true;
+            }
+        }
         legend.onAdd = function(map) {
-            var div = L.DomUtil.create("div", "legend");
-            div.innerHTML += "<h4>Позначення</h4>";
+            const div = L.DomUtil.create('div', 'legend');
+            div.innerHTML += '<h4 align="center">Позначення <i class="fa-solid fa-caret-down"></i></h4>';
             div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Безінформації0.png" /></i><span> Без інформації</span></div>';
             div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Вільно1.png" /><span> Вільно</span></div>';
             div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Часткововільно2.png" /><span> Частково вільно</span></div>';
             div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Значніпроблеми3.png" /><span> Значні проблеми</span></div>';
             div.innerHTML += '<div class="legend-item"><img src="legend/Territories_2_Заборонено4.png" /><span> Заборонено</span></div>';
+            div.setAttribute("onclick", "showDisclaimer()");
+            div.id = "legend";
             return div;
         };
+
         legend.addTo(map);
 
         var baseMaps = {

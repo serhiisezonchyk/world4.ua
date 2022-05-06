@@ -33,7 +33,7 @@
 							container = L.DomUtil.create('div', className + ' leaflet-bar'),
 							icon = L.DomUtil.create('button', className + '-icon', container),
 							form = this._form = L.DomUtil.create('div', className + '-form', container),
-							input;
+							input, button = L.DomUtil.create('button',className + '-clearBut', container);
 
 						this._map = map;
 						this._container = container;
@@ -43,8 +43,11 @@
 
 						input = this._input = L.DomUtil.create('input', '', form);
 						input.type = 'text';
+						input.id = 'geocoder-input';
 						input.placeholder = this.options.placeholder;
 
+						button.innerHTML = 'x';
+						button.id = 'geocoder-button'
 						this._errorElement = L.DomUtil.create('div', className + '-form-no-error', container);
 						this._errorElement.innerHTML = this.options.errorMessage;
 
@@ -168,7 +171,9 @@
 					},
 
 					_geocodeResultSelected: function(result) {
+
 						this.fire('markgeocode', {geocode: result});
+						this._clearResults();
 					},
 
 					_toggle: function() {

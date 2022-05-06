@@ -231,3 +231,20 @@ article section {
     display: flex;
     flex-direction: column;
 }
+
+
+button#geocoder-button{
+    position: absolute;
+    top: -1px;
+    right: 7px;
+    padding: 4px 4px 0 0;
+    border: none;
+    text-align: center;
+    width: 18px;
+    height: 14px;
+    font: 20px/18px Tahoma, Verdana, sans-serif;
+    color: rgba(0, 0, 0, 0.71);
+    text-decoration: none;
+    font-weight: bold;
+    background: transparent;
+}
