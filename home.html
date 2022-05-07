@@ -187,7 +187,72 @@
                 </tr>\
                 </table>'
             }else{
-            popupContent = '<table font>\
+                popupContent ='<table font>\
+                    <tr align="center">\
+                        <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + fugitive_status + '</td>\
+                    </tr>';
+                var general_info = '', entry_doc = '',reg_doc = '',transport = '',
+                    housing = '', nutrition = '',pets = '', charity = '', add_info = '';
+                if(feature.properties['general_info'] != null){
+                    general_info = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-circle-info"></i><strong> Загальна інформація</strong><br />' + (feature.properties['general_info'] !== null ? autolinker.link(feature.properties['general_info'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['entry_doc'] != null){
+                   entry_doc = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-globe"></i><strong> Реєстрація</strong><br />' + (feature.properties['entry_doc'] !== null ? autolinker.link(feature.properties['entry_doc'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['reg_doc'] != null){
+                    reg_doc = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-id-card"></i><strong> Документи</strong><br />' + (feature.properties['reg_doc'] !== null ? autolinker.link(feature.properties['reg_doc'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['transport'] != null){
+                    transport = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-bus"></i><strong> Транспорт</strong><br />' + (feature.properties['transport'] !== null ? autolinker.link(feature.properties['transport'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['housing'] !== null ){
+                    housing = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-house"></i><strong> Житло</strong><br />' + (feature.properties['housing'] !== null ? autolinker.link(feature.properties['housing'].toLocaleString()) : '') + '</td>\
+                    </tr>'
+                }
+                if(feature.properties['nutrition'] !== null){
+                   nutrition = ' <tr>\
+                        <td colspan="2"><i class="fa-solid fa-utensils"></i><strong> Харчування</strong><br />' + (feature.properties['nutrition'] !== null ? autolinker.link(feature.properties['nutrition'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['pets'] !== null){
+                    pets = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-paw"></i><strong> Тварини</strong><br />' + (feature.properties['pets'] !== null ? autolinker.link(feature.properties['pets'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['charity'] !== null){
+                    charity = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-hand-holding-heart"></i><strong> Благодійність</strong><br />' + (feature.properties['charity'] !== null ? autolinker.link(feature.properties['charity'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                if(feature.properties['add_info'] !== null ){
+                    add_info = '<tr>\
+                        <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong> Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
+                    </tr>';
+                }
+                popupContent += general_info;
+                popupContent += entry_doc;
+                popupContent += reg_doc;
+                popupContent += transport;
+                popupContent += housing;
+                popupContent += nutrition;
+                popupContent += pets;
+                popupContent += charity;
+                popupContent += add_info;
+
+                popupContent +='</table>';
+/*            popupContent = '<table font>\
                     <tr align="center">\
                         <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
                     </tr>\
@@ -221,7 +286,8 @@
                     <tr>\
                         <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong> Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                </table>';}
+                </table>';*/
+            }
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             var customOptions =
@@ -409,11 +475,13 @@
         legend.addTo(map);
 
         var baseMaps = {
-            "Спрощений вигляд": layer_Simple_view_0,
+            "Спрощено": layer_Simple_view_0,
             "Google Maps": layer_GoogleMaps_1,
-
         };
-        L.control.layers(baseMaps,{},{collapsed:true}).addTo(map);
+
+        layersViev = L.control.layers(baseMaps,{},{collapsed:true});
+        layersViev.addTo(map);
+
         setBounds();
         resetLabels([layer_Territories_2]);
         map.on("zoomend", function(){
