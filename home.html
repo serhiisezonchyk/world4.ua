@@ -46,6 +46,7 @@
             <input type="checkbox" id="checkbox_toggle" />
             <label for="checkbox_toggle" class="hamburger">&#9776;</label>
             <div class="menu">
+                <li><a href="home.html">Головна</a></li>
                 <li><a href="charity.html">Благодійність</a></li>
                 <li><a href="contacts.html">Контакти</a></li>
                 <li><a href="telegram.html">Telegram-бот</a></li>
@@ -252,41 +253,7 @@
                 popupContent += add_info;
 
                 popupContent +='</table>';
-/*            popupContent = '<table font>\
-                    <tr align="center">\
-                        <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + fugitive_status + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-circle-info"></i><strong> Загальна інформація</strong><br />' + (feature.properties['general_info'] !== null ? autolinker.link(feature.properties['general_info'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-globe"></i><strong> Реєстрація</strong><br />' + (feature.properties['entry_doc'] !== null ? autolinker.link(feature.properties['entry_doc'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-id-card"></i><strong> Документи</strong><br />' + (feature.properties['reg_doc'] !== null ? autolinker.link(feature.properties['reg_doc'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-bus"></i><strong> Транспорт</strong><br />' + (feature.properties['transport'] !== null ? autolinker.link(feature.properties['transport'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-house"></i><strong> Житло</strong><br />' + (feature.properties['housing'] !== null ? autolinker.link(feature.properties['housing'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-utensils"></i><strong> Харчування</strong><br />' + (feature.properties['nutrition'] !== null ? autolinker.link(feature.properties['nutrition'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-paw"></i><strong> Тварини</strong><br />' + (feature.properties['pets'] !== null ? autolinker.link(feature.properties['pets'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-hand-holding-heart"></i><strong> Благодійність</strong><br />' + (feature.properties['charity'] !== null ? autolinker.link(feature.properties['charity'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><i class="fa-solid fa-caret-down"></i><strong> Додаткова інформація</strong><br />' + (feature.properties['add_info'] !== null ? autolinker.link(feature.properties['add_info'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';*/
+
             }
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
