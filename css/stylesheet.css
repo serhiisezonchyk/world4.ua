@@ -248,3 +248,14 @@ button#geocoder-button{
     font-weight: bold;
     background: transparent;
 }
+
+.sticky {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0px 12px 3px 12px;
+    min-height: 2em;
+    text-align: center;
+    background: lightpink;
+}
