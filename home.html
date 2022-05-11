@@ -95,7 +95,7 @@
             text: 'Search',
             placeholder: 'Пошук...',
             title: 'Testing',
-            autocomplete:true
+            autocomplete:true,
         }).addTo(map);
 
         document.getElementById("geocoder-button").onclick = function(e) {
@@ -104,10 +104,13 @@
         }
         map.on('click',function (){
             osmGeocoder._clearResults();
-        })
+        });
         map.on('drag',function (){
             osmGeocoder._clearResults();
-        })
+        });
+        osmGeocoder.on('markgeocode', function (e){
+            /*alert(osmGeocoder.result.center.toLocaleString());*/
+        });
 
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -268,6 +271,8 @@
                 }
             layer.bindPopup(popupContent, customOptions);
         }
+
+
 
         map.on('popupopen', function(e) {
             var px = map.project(e.target._popup._latlng); // find the pixel location on the map where the popup anchor is

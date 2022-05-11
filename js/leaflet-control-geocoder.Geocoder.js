@@ -138,15 +138,6 @@
 
 						this._map.fitBounds(result.bbox);
 
-						if (this._geocodeMarker) {
-							this._map.removeLayer(this._geocodeMarker);
-						}
-
-						this._geocodeMarker = new L.Marker(result.center)
-							.bindPopup(result.html || result.name)
-							.addTo(this._map)
-							.openPopup();
-
 						return this;
 					},
 
@@ -382,7 +373,6 @@
 								result.push({
 									name: data.address.Match_addr,
 									center: loc,
-									bounds: L.latLngBounds(loc, loc)
 								});
 							}
 
