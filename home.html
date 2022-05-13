@@ -192,17 +192,24 @@
                 </tr>\
                 </table></div>'
             }else{
+
+                var general_info = '', entry_doc = '',reg_doc = '',transport = '',
+                    housing = '', nutrition = '',pets = '', charity = '', add_info = '', upd_date = '';
+
+
                 popupContent ='<div class="sticky"><a onclick="return confirm(`Перейти до телеграм боту?`)" target="_blank" href="#">Знайшли помилку?</a></div>';
 
+                if(feature.properties['upddate'] !== null ){
+                    upd_date = '<br> Оновлено ' + (feature.properties['upddate'] !== null ? autolinker.link(feature.properties['upddate'].toLocaleString()) : '') + '';
+                }
                 popupContent +='<div><table font>\
                     <tr align="center">\
-                        <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b></td>\
+                        <td colspan="2"><b>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</b>'+(upd_date)+'</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + fugitive_status + '</td>\
                     </tr>';
-                var general_info = '', entry_doc = '',reg_doc = '',transport = '',
-                    housing = '', nutrition = '',pets = '', charity = '', add_info = '';
+
                 if(feature.properties['general_info'] != null){
                     general_info = '<tr>\
                         <td colspan="2"><i class="fa-solid fa-circle-info"></i><strong> Загальна інформація</strong><br />' + (feature.properties['general_info'] !== null ? autolinker.link(feature.properties['general_info'].toLocaleString()) : '') + '</td>\
