@@ -140,13 +140,17 @@ input[type=checkbox]{
         font-size: x-large;
     }
 }
-
+@media (max-width: 1120px) and (min-width: 950px){
+    .contacts .contact-item {
+        width: 38vw;
+    }
+}
 /*333333333333333333333333333333333333333333333333333333333333333333333333333*/
 @media (max-width: 950px) and (min-width: 768px){
     .contacts .contact-item {
         font-size: 0.9em;
         height: auto;
-        width: 30vw;
+        width: 38vw;
     }
     .contacts .contact-header {
         font-size: 1.1em;
@@ -307,6 +311,8 @@ button#geocoder-button{
     color: rgba(0, 0, 0, 0.4);;
     text-align: right;
     font-size: 0.9em;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 .contact-email {
     color: var(--additional-color);
@@ -320,14 +326,15 @@ button#geocoder-button{
     /*font-size: 1.1em;*/
     height: auto;
     overflow-wrap: anywhere;
-    width: 60vw;
+    width: 80vw;
     margin-bottom: 5vh;
     border-radius: 0;
     padding: 0.5vh 1vw;
+    text-align: center;
     /*display: flex;
     flex-direction: column;
     justify-content: center;*/
 }
 .donates p {
-    padding: 1vh 0 2vh 0;
+    padding: 1vh 2vw 2vh 2vw;
 }
