@@ -62,7 +62,10 @@
         </ul>
         <div class="logo" ><a href="home.html"><p>World4</p><p style="color:rgba(243,217,21,1); font-weight: bold">Ua</p></a></div>
     </nav>
-
+    <div class="mask">
+        <div class="loader"></div>
+        <p class="loader-title">Завантаження мапи</p>
+    </div>
     <div id="map">
     </div>
     <script src="js/qgis2web_expressions.js"></script>
@@ -483,6 +486,13 @@
         map.on("layerremove", function(){
             resetLabels([layer_Territories_2]);
         });
+        let mask = document.querySelector('.mask');
+        window.addEventListener('load', () => {
+            mask.classList.add('hide');
+            setTimeout( () => {
+                mask.remove();
+            }, 600)
+        })
     </script>
     </body>
 </html>
