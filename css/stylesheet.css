@@ -338,6 +338,7 @@ button#geocoder-button{
 .donates p {
     padding: 1vh 2vw 2vh 2vw;
 }
+
 .loader {
     margin: auto;
     width: 75px;
